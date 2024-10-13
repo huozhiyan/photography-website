@@ -1,14 +1,12 @@
-<template>
-  <div class="app-container center">
-    <el-empty description="欢迎来到 editor 角色专属首页" />
-  </div>
-</template>
+<script lang="ts" setup>
+import { useUserStore } from "@/store/modules/user"
+import Admin from "./components/Admin.vue"
+import Editor from "./components/Editor.vue"
 
-<style scoped>
-.center {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-</style>
+const userStore = useUserStore()
+const isAdmin = userStore.roles.includes("admin")
+</script>
+
+<template>
+  <component :is="isAdmin ? Admin : Editor" />
+</template>
